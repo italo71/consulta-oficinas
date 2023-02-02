@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/datatables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://siga.arcoconsultoria.com/SIGA/libsiga/css/main.css">
+    <link rel="stylesheet" href="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://siga.arcoconsultoria.com/SIGA/libsiga/css/style.min.css">
+    <link rel="stylesheet" href="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/node-waves/waves.css">
+    <link rel="stylesheet"
+        href="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/select2/dist/css/select2.min.css">
+    <style>
+        .input-text {
+            border-radius: 5px;
+            border: 1px solid black !important;
+            font-size: 10pt;
+            margin-bottom: 5px;
+        }
+
+        .FadeIn {
+            -webkit-animation: fadeIn 0.5s ease-in-out !important;
+            -moz-animation: fadeIn 0.5s ease-in-out !important;
+            -o-animation: fadeIn 0.5s ease-in-out !important;
+            animation: fadeIn 0.5s ease-in-out !important;
+        }
+
+        .data_input {
+            display: inline-block !important;
+        }
+
+        input {
+            font-size: 11pt;
+        }
+
+        label {
+            font-size: 10pt;
+        }
+
+        li {
+            padding: 5px;
+            margin: 0 10px 10px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        #modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 99999;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+        }
+
+        .select2-selection__rendered {
+            user-select: text;
+        }
+
+        label {
+            display: block;
+            border-radius: 5px;
+        }
+
+        .div-input {
+            margin: 15px;
+        }
+
+        .radio {
+            margin-right: 5px !important;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        .form-control {
+            box-shadow: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        input {
+            font-size: 80% !important;
+            padding-left: 5px;
+        }
+
+        .tel {
+            margin-right: 7px;
+        }
+
+        .obg {
+            color: red !important;
+            margin-left: 3px;
+        }
+
+        #header {
+            padding: 0 !important;
+        }
+
+        #nav-ul {
+            list-style-type: none;
+        }
+
+        #nav-ul li {
+            display: inline;
+            border-bottom: solid 1px lightgray;
+            padding: 0 5px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-right: 3px;
+        }
+
+        .act {
+            border-bottom: solid 3px lightblue !important;
+        }
+
+        #nav-ul li:first-child {
+            margin-left: -5.5%;
+        }
+
+        #nav-ul a {
+            color: black;
+            text-decoration: none;
+        }
+
+        #importacao_eventos option {
+            font-size: 14px;
+        }
+
+        #importacao_eventos {
+            font-size: 12.9px;
+        }
+
+        .modal-content input {
+            border: solid 2px lightgray;
+            border-radius: 5px;
+            height: 26px;
+        }
+
+        .modal-content {
+            margin-top: 10%;
+        }
+
+        .modal {
+            height: 100%;
+        }
+
+        #t {
+            position: absolute;
+            top: 10%;
+            bottom: 0;
+        }
+
+        #nav-ul li {
+            display: inline-block;
+        }
+
+        .tveiculo {
+            margin-right: 5px !important;
+        }
+
+        body {
+            background-color: lightgray !important;
+        }
+
+        #d_s_btn {
+            position: absolute;
+            right: 30px;
+            bottom: 10px;
+        }
+
+        select {
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-radius: 5px;
+            border-bottom: solid 1px lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid  col-12 col-md-12 col-lg-12 col-xs-12 col-sm-12" id="cont">
+        <div class="row col-12">
+            <div class="card" style="margin: 5px 0 0 0.7%;">
+                <div class="justify-content-center m-t-5">
+                    <h2>Pesquisa Oficinas</h2>
+                </div>
+                <div id="caixa_parametros">
+                    <div class=" d-flex justify-content-end" ;>
+                        <div class="form-floating" style=" padding-top: 50px;">
+                            <select id="dadosOficina">
+                                <option></option>
+                                <option value="1">CPF/CNPJ</option>
+                                <option value="2">Nome Fantasia</option>
+                            </select>
+                            <label for="floatingSelect">Selecione</label>
+                        </div>
+                        <div class="div-input form-floating mb-3 m-l-10 col-4" style="display: inline-block;">
+                            <input class="form-control" type="text" autocomplete="off" name="dadosPesquisa"
+                                id="dadosPesquisa" placeholder=".">
+                            <label style="width: 400px;">digite dados para pesquisa <span class="obg">*</span></label>
+                        </div>
+                        <div class="data_input">
+                            <button style="margin-bottom: -86px" class="btn btn-success btn-xs" id="btn_search"
+                                onclick=" parent.ebfFlowExecute('Novo Oficinas - por parametro');">
+                                <div class="span_center">
+                                    <span>Pesquisar</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="col-md-12" style="margin-bottom: 5px;">
+                            <ul class="nav nav-tabs  justify-content-center" id="abas" role="tablist">
+                                <li role="presentation" class="active" id="">
+                                    <a href="#pendentes" data-toggle="tab" id="">
+                                        Oficinas
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div role="tabpanel">
+                                <div class="row clearfix" id="">
+                                    <!-- tabela -->
+                                    <table class="table" id="oficinas" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <!-- cabeçalho tabela -->
+                                                <th class="th_table align-center" style="display:none;">#</th>
+                                                <th class="th_table align-center">Razão Social</th>
+                                                <th class="th_table align-center">Nome Fantasia</th>
+                                                <th class="th_table align-center">CNPJ</th>
+                                                <th class="th_table align-center">Telefone</th>
+                                                <th class="th_table align-center">Cidade</th>
+                                                <th class="th_table align-center">Estado</th>
+                                                <th class="th_table align-center">Status</th>
+                                                <th class="th_table align-center">Favorito</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="scrollable" id="body_oficinas">
+                                            <tr>
+                                                <th class="th_table align-center" style="display:none;">@@#@@</th>
+                                                <th class="th_table align-center">@@razaoSocial@@</th>
+                                                <th class="th_table align-center">@@nomeFantasia@@</th>
+                                                <th class="th_table align-center">@@CNPJ@@</th>
+                                                <th class="th_table align-center">@@Telefone@@</th>
+                                                <th class="th_table align-center">@@Cidade@@</th>
+                                                <th class="th_table align-center">@@Estado@@</th>
+                                                <th class="th_table align-center">
+                                                    <div class="form-floating" style=" padding-top: 50px;">
+                                                        <select id="dadosOficina">
+                                                            <option value="1">ATIVO</option>
+                                                            <option value="2">INATIVO</option>
+                                                            <option value="3">SUSPENSO</option>
+                                                        </select>
+                                                        <label for="floatingSelect">Selecione</label>
+                                                    </div>
+                                                </th>
+                                                <th class="th_table align-center">
+                                                    <button class="btn btn-success" style="display: @@fav@@;"
+                                                        onclick="parent.ebfFlowExecute('favoritar', parent.ebfListParamsCreate(@@ofiID@@));;">Favoritar</button>
+                                                    <button class="btn btn-danger" style="display: @@unfav@@;"
+                                                        onclick="parent.ebfFlowExecute('removerFavorito', parent.ebfListParamsCreate(@@ofiID@@));;">Remover
+                                                        Favoritar</button>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jquery Core Js -->
+        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap Core Js -->
+        <script src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Fusioncharts Js -->
+        <script src="https://siga.arcoconsultoria.com/SIGA/FC/fusioncharts.js"></script>
+        <script src="https://siga.arcoconsultoria.com/SIGA/FC/fusioncharts.charts.js"></script>
+        <script src="https://siga.arcoconsultoria.com/SIGA/FC/themes/fusioncharts.theme.fint.js"></script>
+
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/moment/moment.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/datatables.min.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/dt-moment.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.flash.min.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/jszip.min.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/pdfmake.min.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/vfs_fonts.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.html5.min.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/plugins/datatables/Buttons-1.6.1/js/buttons.print.min.js"></script>
+        <script type="text/javascript"
+            src="https://siga.arcoconsultoria.com/SIGA/libsiga/js/mainNoConflict.js"></script>
+</body>
+
+</html>
